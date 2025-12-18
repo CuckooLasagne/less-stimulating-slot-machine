@@ -1,7 +1,10 @@
+
+const customIcon = new Image();
+customIcon.src = 'Nobel_Prize.png'; // IMAGE PATH
+
 class Reel {
     constructor(x, y, ctx) {
-        this.symbols = ["◆", "●", "■", "▲", "✦"];
-        //this.symbols = ["◆", "●"];
+        this.symbols = ["⌛", "🕓", "⏰", customIcon]; 
         this.ctx = ctx;
         this.x = x;
         this.y = y;
@@ -41,8 +44,25 @@ class Reel {
         for (let i = -1; i <= 1; i++) {
             let index = Math.floor((this.angle / this.symbolSize) + i) % this.symbols.length;
             if (index < 0) index += this.symbols.length;
+            
             let symbol = this.symbols[index];
-            this.ctx.fillText(symbol, this.x, this.y + i * this.symbolSize);
+            let drawY = this.y + i * this.symbolSize;
+
+
+            if (symbol instanceof HTMLImageElement) {
+
+                const imgSize = 50; // Image Size
+                this.ctx.drawImage(
+                    symbol, 
+                    this.x - imgSize / 2, 
+                    drawY - imgSize / 2, 
+                    imgSize, 
+                    imgSize
+                );
+            } else {
+
+                this.ctx.fillText(symbol, this.x, drawY);
+            }
         }
 
         this.ctx.restore();
@@ -56,6 +76,7 @@ class Reel {
         return this.v === 0;
     }
 }
+
 
 const c = document.getElementById("c");
 const ctx = c.getContext("2d");
