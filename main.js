@@ -4,7 +4,7 @@ customIcon.src = 'Nobel_Prize.png'; // IMAGE PATH
 
 class Reel {
     constructor(x, y, ctx) {
-        this.symbols = ["◆", "●", "■", "▲", customIcon]; 
+        this.symbols = ["-", "+", "#", "o", customIcon];
         this.ctx = ctx;
         this.x = x;
         this.y = y;
